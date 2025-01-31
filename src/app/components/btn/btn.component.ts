@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class BtnComponent {
   @Input() typeBtn: 'button' | 'submit' | 'reset' = 'button';
-  @Input() color: 'success' | 'primary' | 'red' = 'primary';
+  @Input() color: 'success' | 'primary' | 'red' = 'success';
 
   get colors () {
     return {
