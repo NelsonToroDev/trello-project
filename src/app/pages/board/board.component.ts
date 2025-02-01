@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { List } from '../../models/list.model';
 import { ToDo } from '../../models/todo.model';
 import { BtnComponent } from '../../components/btn/btn.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { DialogModule, Dialog } from '@angular/cdk/dialog';
+import { TodoDialogComponent } from '../../components/todo-dialog/todo-dialog.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [DragDropModule, BtnComponent, NavbarComponent],
+  imports: [DragDropModule, BtnComponent, NavbarComponent, DialogModule],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -62,6 +64,20 @@ export class BoardComponent {
 
   ];
 
+  dialog = inject(Dialog);
+  openDialog(todo: ToDo) {
+    const dialogRef = this.dialog.open(TodoDialogComponent, {
+      minWidth: '300px',
+      maxWidth: '50%',
+      data: {
+        todo: todo,
+      },
+    });
+    dialogRef.closed.subscribe((output) => {
+      console.log(output);
+    });
+  }
+
   drop (event: CdkDragDrop<ToDo[], ToDo[], any>) {
     if (event.previousContainer === event.container) {
       // move the item in the same list
@@ -80,9 +96,4 @@ export class BoardComponent {
       todos: []
     });
   }
-
-  openDialog (arg0: any) {
-    console.log('open dialog');
-  }
-
 }
