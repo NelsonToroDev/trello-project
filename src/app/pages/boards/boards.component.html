@@ -41,6 +41,23 @@
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
+    <cdk-accordion >
+      @for (item of items; track $index) {
+        <cdk-accordion-item #accordionItem="cdkAccordionItem">
+          <button class="w-full text-left" type="button" (click)="accordionItem.toggle()">
+            <fa-icon [icon]="accordionItem.expanded ? faAngleUp : faAngleDown"></fa-icon>
+            {{ item.label }}
+          </button>
+          <div [style.display]="accordionItem.expanded ? '' : 'none'">
+            <ul>
+              @for (subItem of item.items; track $index) {
+                <li class="pl-6">{{ subItem.label }}</li>
+              }
+            </ul>
+          </div>
+        </cdk-accordion-item>
+      }
+    </cdk-accordion>
   </div>
   <div class="w-full">
     <h1 class="text-lg font-bold mb-4"><fa-icon [icon]="faClock"></fa-icon> Recently viewed</h1>

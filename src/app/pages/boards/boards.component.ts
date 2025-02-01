@@ -3,8 +3,7 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBox, faWaveSquare, faClock, faAngleUp, faAngleDown, faHeart, faBorderAll, faUsers, faGear } from '@fortawesome/free-solid-svg-icons';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
-
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-boards',
@@ -23,4 +22,54 @@ export class BoardsComponent {
   faUsers = faUsers;
   faGear = faGear;
   faAngleDown = faAngleDown;
+
+  items = [
+    {
+      label: 'Personal Boards',
+      items: [
+        {
+          label: 'My Boards',
+        },
+        {
+          label: 'Starred Boards',
+        }
+      ]
+    },
+    {
+      label: 'Team Boards',
+      items: [
+        {
+          label: 'Team 1',
+        },
+        {
+          label: 'Team 2',
+        }
+      ]
+    },
+    {
+      label: 'Templates',
+      items: [
+        {
+          label: 'Create from Template',
+        },
+        {
+          label: 'Team Templates',
+        }
+      ]
+    },
+    {
+      label: 'More',
+      items: [
+        {
+          label: 'Archived Items',
+        },
+        {
+          label: 'Activity',
+        },
+        {
+          label: 'Settings',
+        }
+      ]
+    }
+  ]
 }
