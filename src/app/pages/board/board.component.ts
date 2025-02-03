@@ -65,7 +65,8 @@ export class BoardComponent {
   ];
 
   dialog = inject(Dialog);
-  openDialog(todo: ToDo) {
+
+  openDialog (todo: ToDo) {
     const dialogRef = this.dialog.open(TodoDialogComponent, {
       minWidth: '300px',
       maxWidth: '50%',
