@@ -1,0 +1,49 @@
+<h1 class="text-center font-semibold pt-4 pb-8">Log in to Trello</h1>
+<form novalidate
+      class="space-y-4"
+      (ngSubmit)="onLogin()">
+  <div class="relative">
+    <input #nameInput
+           placeholder="Enter email"
+           formControlName="email"
+           type="email"
+           class="w-full rounded bg-gray-100 border-gray-300">
+    <button type="button"
+            class="p-2 absolute right-2"
+            (click)="nameInput.focus()">
+      <fa-icon [icon]="faPen"></fa-icon>
+    </button>
+  </div>
+  @if (this.loginForm.controls.email.touched && this.loginForm.controls.email.invalid) {
+    @if (this.loginForm.controls.email.hasError('required')) {
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">This field is mandatory</p>
+    }
+    @if (this.loginForm.controls.email.hasError('email')) {
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">This field should be an email</p>
+    }
+  }
+  <div class="relative">
+    <input formControlName="password"
+           placeholder="Enter password"
+           [type]="showPassword ? 'text' : 'password'"
+           class="w-full rounded bg-gray-100 border-gray-300 border-2" />
+  </div>
+  <button type="button"
+          class="p-2 absolute right-2"
+          (click)="showPassword = !showPassword">
+    <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+  </button>
+  @if (this.loginForm.controls.password.touched && this.loginForm.controls.password.invalid) {
+    @if (this.loginForm.controls.password.hasError('required')) {
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">This field is mandatory</p>
+    }
+    @if (this.loginForm.controls.password.hasError('minlength')) {
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">This field should have at least 6 characters</p>
+    }
+  }
+  <div class="relative">
+    <app-btn typeBtn="submit"
+             color="success"
+             [loading]="status === 'loading'">Login</app-btn>
+  </div>
+</form>

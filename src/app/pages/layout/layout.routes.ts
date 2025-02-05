@@ -16,6 +16,10 @@ export const LayoutRoutes: Routes = [
         loadComponent: () => import('../boards/boards.component').then(m => m.BoardsComponent)
       },
       {
+        path: 'boards/:id',
+        loadComponent: () => import('../board/board.component').then(m => m.BoardComponent)
+      },
+      {
         path: 'profile',
         loadComponent: () => import('../profile/profile.component').then(m => m.ProfileComponent)
       },
