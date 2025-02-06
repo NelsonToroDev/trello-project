@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { BtnComponent } from "../btn/btn.component";
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPen, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FontAwesomeModule, BtnComponent],
+  imports: [FontAwesomeModule, BtnComponent, ReactiveFormsModule],
   templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent {
@@ -21,9 +21,10 @@ export class LoginFormComponent {
 
   loginForm = this.formBuilder.group(
     {
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
-     });
+    }
+  );
 
   get email() {
     return this.loginForm.get('email');

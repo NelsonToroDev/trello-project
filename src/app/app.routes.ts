@@ -9,5 +9,4 @@ export const routes: Routes = [
     path: 'app',
     loadChildren: () => import('./pages/layout/layout.routes').then(m => m.LayoutRoutes)
   },
-
 ];
