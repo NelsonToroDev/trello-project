@@ -17,7 +17,7 @@ export class RecoveryFormComponent {
   // Reference to form group
   recoveryForm = this.formBuilder.group({
     // FormControls
-    newPassword: ['', [Validators.required, Validators.minLength(6)]],
+    newPassword: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', [Validators.required]]
   },
   {
