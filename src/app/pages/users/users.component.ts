@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UsersDataSource } from './users.datasource'
 import { CdkTableModule } from '@angular/cdk/table';
+import { UsersService } from '@services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -8,30 +9,16 @@ import { CdkTableModule } from '@angular/cdk/table';
   imports: [CdkTableModule],
   templateUrl: './users.component.html'
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   dataSource = new UsersDataSource();
   columns: string[] = ['id', 'avatar', 'name', 'email'];
+  usersService = inject(UsersService);
+  constructor() {}
 
-  constructor() {
-    this.dataSource.init([
-      {
-        id: 1,
-        name: 'User 1',
-        email: 'mail@mail.com',
-        avatar: 'https://api.lorem.space/image/face?w=150&h=150'
-      },
-      {
-        id: 2,
-        name: 'User 2',
-        email: 'mail2@mail.com',
-        avatar: 'https://api.lorem.space/image/face?w=150&h=150'
-      },
-      {
-        id: 3,
-        name: 'User 3',
-        email: 'mail3@mail.com',
-        avatar: 'https://api.lorem.space/image/face?w=150&h=150'
-      }
-    ]);
+  ngOnInit (): void {
+    this.usersService.getUsers()
+      .subscribe(users => {
+        this.dataSource.init(users);
+      });
   }
 }
