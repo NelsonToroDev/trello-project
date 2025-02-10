@@ -66,6 +66,11 @@
       The password are not the same
     </p>
     }
+    @if(status === 'failed'){
+      <p class="font-medium text-red-500 text-xs mt-1 ml-1">
+        An error occurs trying to recovery your password
+      </p>
+      }
   </div>
   }
   <div>
