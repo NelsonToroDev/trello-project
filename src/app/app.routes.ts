@@ -1,4 +1,7 @@
+// app.routes.ts
+
 import { Routes } from '@angular/router';
+import { authGuard } from '@guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -7,6 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'app',
+    canActivate: [authGuard],
     loadChildren: () => import('./pages/layout/layout.routes').then(m => m.LayoutRoutes)
   },
 ];
