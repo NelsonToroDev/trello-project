@@ -4,13 +4,14 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faBell, faClose, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '@services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { User } from '@models/user.model';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [BtnComponent, OverlayModule, FontAwesomeModule],
+  imports: [BtnComponent, OverlayModule, FontAwesomeModule, RouterModule, AsyncPipe],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit{
@@ -27,8 +28,7 @@ export class NavbarComponent implements OnInit{
   isOpenOverlayBoards = false;
 
   ngOnInit () {
-    this.authService.getProfile()
-      .subscribe(user => this.user = user)
+    this.authService.user$.subscribe((user) => this.user = user);
   }
 
   logout () {

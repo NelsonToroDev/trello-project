@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from '@environments/environment';
-import { switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { ResponseLogin } from '@models/auth.model';
 import { User } from '@models/user.model';
@@ -15,6 +15,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
   apiUrl = environment.API_URL;
+  user$ = new BehaviorSubject<User | null>(null);
 
   constructor() { }
 
@@ -82,6 +83,9 @@ export class AuthService {
           avatar: `https://avatar.iran.liara.run/username?username=${user.name}`
         };
       })
+    )
+    .pipe(
+      tap( user => this.user$.next(user))
     );
   }
 }

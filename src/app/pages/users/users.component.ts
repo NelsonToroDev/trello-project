@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UsersDataSource } from './users.datasource'
 import { CdkTableModule } from '@angular/cdk/table';
 import { UsersService } from '@services/users.service';
+import { AuthService } from '@services/auth.service';
+import { User } from '@models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -13,6 +15,8 @@ export class UsersComponent implements OnInit {
   dataSource = new UsersDataSource();
   columns: string[] = ['id', 'avatar', 'name', 'email'];
   usersService = inject(UsersService);
+  authService = inject(AuthService);
+  user: User | null = null;
   constructor() {}
 
   ngOnInit (): void {
@@ -20,5 +24,7 @@ export class UsersComponent implements OnInit {
       .subscribe(users => {
         this.dataSource.init(users);
       });
+    
+    this.authService.user$.subscribe((user) => this.user = user);
   }
 }
